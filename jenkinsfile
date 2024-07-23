@@ -9,7 +9,7 @@ pipeline {
     environment {
         SCANNER_HOME=tool 'sonar-scanner'
     }
-    
+     }
     stages{
         
         stage("Git Checkout"){
@@ -18,40 +18,4 @@ pipeline {
             }
         }
         
-        stage("Compile"){
-            steps{
-                sh "mvn clean compile"
-            }
-        }
-        
-         stage("Test Cases"){
-            steps{
-                sh "mvn test"
-            }
-        }
-        
-        stage("Sonarqube Analysis "){
-            steps{
-                withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=jest \
-                    -Dsonar.java.binaries=. \
-                    -Dsonar.projectKey=jest '''
-    
-                }
-            }
-        }
-        
-        stage("OWASP Dependency Check"){
-            steps{
-                dependencyCheck additionalArguments: '--scan ./ --format HTML ', odcInstallation: 'DP'
-                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-            }
-        }
-        
-         stage("Build"){
-            steps{
-                sh " mvn clean install"
-            }
-        }
-        
-       
+       }
