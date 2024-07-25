@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         maven 'maven3' // Name of the Maven installation defined in Global Tool Configuration
-        jdk 'JDK 17'  // Name of the JDK installation defined in Global Tool Configuration
+        jdk 'jdk17'  // Name of the JDK installation defined in Global Tool Configuration
     }
     }
 
