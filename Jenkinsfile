@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3.6.3' // Name of the Maven installation defined in Global Tool Configuration
+        maven 'Maven3' // Name of the Maven installation defined in Global Tool Configuration
     }
 
     stages {
