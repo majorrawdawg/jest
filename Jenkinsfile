@@ -34,7 +34,7 @@ pipeline {
         }
         stage('SonarQube analysis'){
             steps {
-                withSonarQubeEnv(credentialsId: 'sonar-api-key') { // Use the correct credentials ID
+               withSonarQubeEnv(installationName: 'SonarQubeServer', credentialsId: 'sonar-api-key') { 
                     sh 'mvn sonar:sonar -Dsonar.login=$SONARQUBE_TOKEN -Dsonar.host.url=$SONARQUBE_URL'
                 }
             }
