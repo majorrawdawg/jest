@@ -6,6 +6,11 @@ pipeline {
         jdk 'jdk17'  // Name of the JDK installation defined in Global Tool Configuration
     }
 
+    environment {
+        SONARQUBE_URL = 'https://your-sonarqube-server-url' // Replace with your actual SonarQube server URL
+        SONARQUBE_TOKEN = credentials('sonar-api-token') // Use the ID you saved the token as in Jenkins credentials
+    }
+
     stages {
         stage("Git Checkout") {
             steps {
@@ -29,11 +34,9 @@ pipeline {
         }
         stage('SonarQube analysis'){
             steps {
-               script { 
-                  withSonarQubeEnv(credentialsId: 'sonar-api-key') {
-                   sh 'mvn sonar:sonar -Dsonar.login=$SONARQUBE_TOKEN -Dsonar.host.url=$SONARQUBE_URL'
+                withSonarQubeEnv('SonarQube') { // Use the SonarQube server name configured in Jenkins
+                    sh 'mvn sonar:sonar -Dsonar.login=$SONARQUBE_TOKEN -Dsonar.host.url=$SONARQUBE_URL'
                 }
-               }
             }
         }
     }
