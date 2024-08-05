@@ -34,7 +34,7 @@ pipeline {
         }
         stage('SonarQube analysis'){
             steps {
-                withSonarQubeEnv('SonarQube') { // Use the SonarQube server name configured in Jenkins
+                withSonarQubeEnv(credentialsId: 'sonar-api-key') { // Use the correct credentials ID
                     sh 'mvn sonar:sonar -Dsonar.login=$SONARQUBE_TOKEN -Dsonar.host.url=$SONARQUBE_URL'
                 }
             }
